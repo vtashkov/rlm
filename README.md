@@ -1,2 +1,2 @@
-# rlm
-The Rust Machine Learning library
+# The Rust Machine Learning library
+
