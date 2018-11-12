@@ -1,0 +1,6 @@
+[package]
+name = "rlm"
+version = "0.1.0"
+authors = ["Victor Tashkov <vtashkov@gmail.com>"]
+
+[dependencies]
