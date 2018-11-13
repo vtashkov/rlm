@@ -1,7 +1,14 @@
+
 #[cfg(test)]
 mod tests {
+
+    extern crate arrayfire as af;
+
+    use self::af::*;
+
     #[test]
     fn it_works() {
-        assert_eq!(2 + 2, 4);
+        info();
+        assert_eq!(2, 2);
     }
 }
