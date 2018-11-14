@@ -155,3 +155,17 @@ fn can_add_matrices() {
     let expected_array = &mut vec![1.0, 3.0, 6.0, 8.0, 5.0, 0.0];
     assert_eq!(expected_array, host_c);
 }
+
+#[test]
+fn can_substract_matrices() {
+    let m = 2;
+    let n = 3;
+    let a = Array::new(&vec![1.0, 3.0, 1.0, 1.0, 0.0, 0.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let b = Array::new(&vec![0.0, 0.0, 5.0, 7.0, 5.0, 0.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let c = a - b;
+    let mut host_c = &mut vec![0.0; n * m];
+    c.host(&mut host_c);
+
+    let expected_array = &mut vec![1.0, 3.0, -4.0, -6.0, -5.0, 0.0];
+    assert_eq!(expected_array, host_c);
+}
