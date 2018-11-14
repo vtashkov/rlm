@@ -157,7 +157,7 @@ fn can_add_matrices() {
 }
 
 #[test]
-fn can_substract_matrices() {
+fn can_subtract_matrices() {
     let m = 2;
     let n = 3;
     let a = Array::new(&vec![1.0, 3.0, 1.0, 1.0, 0.0, 0.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
