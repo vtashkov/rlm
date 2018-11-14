@@ -87,3 +87,14 @@ fn can_create_array_with_n_x_m_uniformly_distributed_values() {
         assert!(host_array[i] <= 1.0);
     }
 }
+
+#[test]
+fn can_create_3_x_3_identity_matrix() {
+    let gpu_array = identity::<f64>(Dim4::new(&[3, 3, 1, 1]));
+    let mut host_array = &mut vec![0.0; 3 * 3];
+    gpu_array.host(&mut host_array);
+
+    let expected_array = &mut vec![1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0];
+    assert_eq!(3 * 3, host_array.len());
+    assert_eq!(expected_array, host_array);
+}
