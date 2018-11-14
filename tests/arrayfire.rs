@@ -144,3 +144,17 @@ fn can_create_3_x_3_identity_matrix() {
     assert_eq!(3 * 3, host_array.len());
     assert_eq!(expected_array, host_array);
 }
+
+#[test]
+fn can_add_matrices() {
+    let n = 2;
+    let m = 3;
+    let a = Array::new(&vec![1.0, 3.0, 1.0, 1.0, 0.0, 0.0], Dim4::new(&[n as u64, m as u64, 1, 1]));
+    let b = Array::new(&vec![0.0, 0.0, 5.0, 7.0, 5.0, 0.0], Dim4::new(&[n as u64, m as u64, 1, 1]));
+    let c = a + b;
+    let mut host_c = &mut vec![0.0; n * m];
+    c.host(&mut host_c);
+
+    let expected_array = &mut vec![1.0, 3.0, 6.0, 8.0, 5.0, 0.0];
+    assert_eq!(expected_array, host_c);
+}
