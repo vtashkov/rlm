@@ -73,3 +73,17 @@ fn can_create_array_with_n_x_m_constant_double_values() {
     assert_eq!(n * m, host_array.len());
     assert_eq!(expected_array, host_array);
 }
+
+#[test]
+fn can_create_array_with_n_x_m_uniformly_distributed_values() {
+    let n = 3;
+    let m = 3;
+    let gpu_array = randu::<f64>(Dim4::new(&[n as u64, m as u64, 1, 1]));
+    let mut host_array = &mut vec![0.0; n * m];
+    gpu_array.host(&mut host_array);
+
+    for i in 0..n * m {
+        assert!(host_array[i] >= 0.0);
+        assert!(host_array[i] <= 1.0);
+    }
+}
