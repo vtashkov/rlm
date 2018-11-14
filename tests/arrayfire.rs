@@ -98,3 +98,36 @@ fn can_create_3_x_3_identity_matrix() {
     assert_eq!(3 * 3, host_array.len());
     assert_eq!(expected_array, host_array);
 }
+
+#[test]
+fn can_create_array_with_one_value_from_host() {
+    let data = &vec![1.0];
+    let gpu_array = Array::new(data, Dim4::new(&[1, 1, 1, 1]));
+    let mut host_array = &mut vec![0.0];
+    gpu_array.host(&mut host_array);
+
+    assert_eq!(data, host_array);
+}
+
+#[test]
+fn can_create_array_with_n_values_from_host() {
+    let n = 3;
+    let data = &vec![1.0, 2.0, 3.0];
+    let gpu_array = Array::new(data, Dim4::new(&[n as u64, 1, 1, 1]));
+    let mut host_array = &mut vec![0.0; n];
+    gpu_array.host(&mut host_array);
+
+    assert_eq!(data, host_array);
+}
+
+#[test]
+fn can_create_array_with_n_x_m_values_from_host() {
+    let n = 2;
+    let m = 3;
+    let data = &vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+    let gpu_array = Array::new(data, Dim4::new(&[n as u64, m as u64, 1, 1]));
+    let mut host_array = &mut vec![0.0; n * m];
+    gpu_array.host(&mut host_array);
+
+    assert_eq!(data, host_array);
+}
