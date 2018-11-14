@@ -3,6 +3,19 @@ extern crate arrayfire;
 use arrayfire::*;
 
 #[test]
+fn can_get_empty_array_dimensions() {
+    let n = 3;
+    let m = 5;
+    let gpu_array = Array::<f64>::new_empty(Dim4::new(&[n, m, 1, 1]));
+    let dim = gpu_array.dims();
+
+    assert_eq!(n, dim[0]);
+    assert_eq!(m, dim[1]);
+    assert_eq!(1, dim[2]);
+    assert_eq!(1, dim[3]);
+}
+
+#[test]
 fn can_create_array_with_one_constant_integer_value() {
     let value = 1;
     let gpu_array = constant(value, Dim4::new(&[1, 1, 1, 1]));
