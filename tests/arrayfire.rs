@@ -248,3 +248,37 @@ fn can_multiply_matrix_and_matrix() {
 
     assert_eq!(expected_array, host_c);
 }
+
+#[test]
+fn can_mulitply_matrix_and_identity() {
+    let m = 3;
+    let n = 2;
+    let a = randu::<f64>(Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let mut host_a = &mut vec![0.0; m * n];
+    a.host(&mut host_a);
+
+    let i = identity::<f64>(Dim4::new(&[n as u64, n as u64, 1, 1]));
+
+    let c = matmul(&a, &i, MatProp::NONE, MatProp::NONE);
+    let mut host_c = &mut vec![0.0; m * n];
+    c.host(&mut host_c);
+
+    assert_eq!(host_a, host_c);
+}
+
+#[test]
+fn can_mulitply_identity_and_matrix() {
+    let m = 3;
+    let n = 2;
+    let a = randu::<f64>(Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let mut host_a = &mut vec![0.0; m * n];
+    a.host(&mut host_a);
+
+    let i = identity::<f64>(Dim4::new(&[m as u64, m as u64, 1, 1]));
+
+    let c = matmul(&i, &a, MatProp::NONE, MatProp::NONE);
+    let mut host_c = &mut vec![0.0; m * n];
+    c.host(&mut host_c);
+
+    assert_eq!(host_a, host_c);
+}
