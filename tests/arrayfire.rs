@@ -218,3 +218,33 @@ fn can_multiply_matrix_and_vector() {
     let expected_array = &mut vec![6.0, 15.0, 24.0];
     assert_eq!(expected_array, host_c);
 }
+
+#[test]
+fn can_multiply_matrix_and_matrix() {
+    let m = 2;
+    let n = 2;
+    let o = 2;
+
+    // 1 3
+    // 2 5
+    // data is being read column by column!
+    let data_a = &vec![1.0, 2.0, 3.0, 5.0];
+
+    // 0 1
+    // 3 2
+    // data is being read column by column!
+    let data_b = &vec![0.0, 3.0, 1.0, 2.0];
+
+    let a = Array::new(data_a, Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let b = Array::new(data_b, Dim4::new(&[n as u64, o as u64, 1, 1]));
+    let c: Array<f64> = matmul(&a, &b, MatProp::NONE, MatProp::NONE);
+    let mut host_c = &mut vec![0.0; m * o];
+    c.host(&mut host_c);
+
+    //  9  7
+    // 15 12
+    // data is being read column by column!
+    let expected_array = &mut vec![9.0, 15.0, 7.0, 12.0];
+
+    assert_eq!(expected_array, host_c);
+}
