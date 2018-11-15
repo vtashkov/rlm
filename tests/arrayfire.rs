@@ -282,3 +282,27 @@ fn can_mulitply_identity_and_matrix() {
 
     assert_eq!(host_a, host_c);
 }
+
+#[test]
+fn can_inverse_matrix() {
+    let m = 2;
+
+    // 3  4
+    // 2 16
+    // data is being read column by column!
+    let data = &vec![3.0, 2.0, 4.0, 16.0];
+    let dim = Dim4::new(&[m as u64, m as u64, 1, 1]);
+    let a = Array::new(data, dim);
+
+    let a_inverse = inverse(&a, MatProp::NONE);
+
+    let a_identity = identity::<f64>(dim);
+    let mut host_a_identity = &mut vec![0.0; m * m];
+    a_identity.host(&mut host_a_identity);
+
+    let c = matmul(&a, &a_inverse, MatProp::NONE, MatProp::NONE);
+    let mut host_c = &mut vec![0.0; m * m];
+    c.host(&mut host_c);
+
+    assert_eq!(host_a_identity, host_c);
+}
