@@ -108,8 +108,8 @@ fn can_create_array_with_m_x_n_constant_double_values() {
 
 #[test]
 fn can_create_array_with_m_x_n_values_from_host() {
-    let m = 2;
-    let n = 3;
+    let m = 3;
+    let n = 2;
     let data = &vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
     let gpu_array = Array::new(data, Dim4::new(&[m as u64, n as u64, 1, 1]));
     let mut host_array = &mut vec![0.0; m * n];
@@ -158,8 +158,8 @@ fn can_add_matrices() {
 
 #[test]
 fn can_subtract_matrices() {
-    let m = 2;
-    let n = 3;
+    let m = 3;
+    let n = 2;
     let a = Array::new(&vec![1.0, 3.0, 1.0, 1.0, 0.0, 0.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
     let b = Array::new(&vec![0.0, 0.0, 5.0, 7.0, 5.0, 0.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
     let c = a - b;
@@ -172,8 +172,8 @@ fn can_subtract_matrices() {
 
 #[test]
 fn can_multiply_matrix_and_scalar() {
-    let m = 2;
-    let n = 3;
+    let m = 3;
+    let n = 2;
     let a = Array::new(&vec![1.0, 2.0, 4.0, 5.0, 3.0, 2.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
     let b = 2;
     let c: Array<f64> = a * b;
@@ -186,8 +186,8 @@ fn can_multiply_matrix_and_scalar() {
 
 #[test]
 fn can_divide_matrix_and_scalar() {
-    let m = 2;
-    let n = 3;
+    let m = 3;
+    let n = 2;
     let a = Array::new(&vec![1.0, 2.0, 4.0, 5.0, 3.0, 2.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
     let b = 2;
     let c: Array<f64> = a / b;
