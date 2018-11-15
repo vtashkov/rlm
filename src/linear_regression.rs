@@ -3,8 +3,10 @@ struct LinearRegressionModel {
     theta1: f64,
 }
 
-fn predict(model: &LinearRegressionModel, x: f64) -> f64 {
-    model.theta0 + x * model.theta1
+impl LinearRegressionModel {
+    fn predict(&self, x: f64) -> f64 {
+        self.theta0 + x * self.theta1
+    }
 }
 
 #[cfg(test)]
@@ -18,9 +20,9 @@ mod tests {
             theta1: 0.0,
         };
 
-        assert_eq!(0.0, predict(&model, 0.0));
-        assert_eq!(0.0, predict(&model, 1.0));
-        assert_eq!(0.0, predict(&model, -1.0));
+        assert_eq!(0.0, model.predict(0.0));
+        assert_eq!(0.0, model.predict(1.0));
+        assert_eq!(0.0, model.predict(-1.0));
     }
 
     #[test]
@@ -30,9 +32,9 @@ mod tests {
             theta1: 1.0,
         };
 
-        assert_eq!(0.0, predict(&model, 0.0));
-        assert_eq!(1.0, predict(&model, 1.0));
-        assert_eq!(-1.0, predict(&model, -1.0));
+        assert_eq!(0.0, model.predict(0.0));
+        assert_eq!(1.0, model.predict(1.0));
+        assert_eq!(-1.0, model.predict(-1.0));
     }
 
     #[test]
@@ -42,8 +44,8 @@ mod tests {
             theta1: 1.0,
         };
 
-        assert_eq!(1.0, predict(&model, 0.0));
-        assert_eq!(2.0, predict(&model, 1.0));
-        assert_eq!(0.0, predict(&model, -1.0));
+        assert_eq!(1.0, model.predict(0.0));
+        assert_eq!(2.0, model.predict(1.0));
+        assert_eq!(0.0, model.predict(-1.0));
     }
 }
