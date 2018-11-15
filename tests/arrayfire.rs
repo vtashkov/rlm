@@ -169,3 +169,17 @@ fn can_subtract_matrices() {
     let expected_array = &mut vec![1.0, 3.0, -4.0, -6.0, -5.0, 0.0];
     assert_eq!(expected_array, host_c);
 }
+
+#[test]
+fn can_multiply_matrix_and_scalar() {
+    let m = 2;
+    let n = 3;
+    let a = Array::new(&vec![1.0, 2.0, 4.0, 5.0, 3.0, 2.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let b = 2.0;
+    let c: Array<f64> = a * b;
+    let mut host_c = &mut vec![0.0; n * m];
+    c.host(&mut host_c);
+
+    let expected_array = &mut vec![2.0, 4.0, 8.0, 10.0, 6.0, 4.0];
+    assert_eq!(expected_array, host_c);
+}
