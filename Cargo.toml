@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Victor Tashkov <vtashkov@gmail.com>"]
 
 [dependencies]
+arrayfire = "3.6"
