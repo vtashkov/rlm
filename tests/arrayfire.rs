@@ -306,3 +306,26 @@ fn can_inverse_matrix() {
 
     assert_eq!(host_a_identity, host_c);
 }
+
+#[test]
+fn can_transpose_matrix() {
+    let m = 2;
+    let n = 3;
+
+    // 1 2 0
+    // 3 5 9
+    // data is being read column by column!
+    let data = &vec![1.0, 3.0, 2.0, 5.0, 0.0, 9.0];
+    let a = Array::new(&data, Dim4::new(&[m as u64, n as u64, 1, 1]));
+    let a_transpose = transpose(&a, false);
+    let mut host_a_transpose = &mut vec![0.0; m * n];
+    a_transpose.host(&mut host_a_transpose);
+
+    // 1 3
+    // 2 5
+    // 0 9
+    // data is being read column by column!
+    let expected_array = &mut vec![1.0, 2.0, 0.0, 3.0, 5.0, 9.0];
+
+    assert_eq!(expected_array, host_a_transpose);
+}
