@@ -202,7 +202,14 @@ fn can_divide_matrix_and_scalar() {
 fn can_multiply_matrix_and_vector() {
     let m = 3;
     let n = 3;
-    let a = Array::new(&vec![1.0, 4.0, 7.0, 2.0, 5.0, 8.0, 3.0, 6.0, 9.0], Dim4::new(&[m as u64, n as u64, 1, 1]));
+
+    // 1 2 3
+    // 4 5 6
+    // 7 8 9
+    // data is being read column by column!
+    let data = &vec![1.0, 4.0, 7.0, 2.0, 5.0, 8.0, 3.0, 6.0, 9.0];
+
+    let a = Array::new(data, Dim4::new(&[m as u64, n as u64, 1, 1]));
     let b = Array::new(&vec![1.0, 1.0, 1.0], Dim4::new(&[n as u64, 1, 1, 1]));
     let c: Array<f64> = matmul(&a, &b, MatProp::NONE, MatProp::NONE);
     let mut host_c = &mut vec![0.0; m];
