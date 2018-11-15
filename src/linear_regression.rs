@@ -15,10 +15,7 @@ mod tests {
 
     #[test]
     fn all_zero_model_always_predicts_zero() {
-        let model = LinearRegressionModel {
-            theta0: 0.0,
-            theta1: 0.0,
-        };
+        let model = LinearRegressionModel { theta0: 0.0, theta1: 0.0 };
 
         assert_eq!(0.0, model.predict(0.0));
         assert_eq!(0.0, model.predict(1.0));
@@ -27,10 +24,7 @@ mod tests {
 
     #[test]
     fn zero_one_model_always_predicts_x() {
-        let model = LinearRegressionModel {
-            theta0: 0.0,
-            theta1: 1.0,
-        };
+        let model = LinearRegressionModel { theta0: 0.0, theta1: 1.0 };
 
         assert_eq!(0.0, model.predict(0.0));
         assert_eq!(1.0, model.predict(1.0));
@@ -39,10 +33,7 @@ mod tests {
 
     #[test]
     fn one_one_model_always_predicts_x_plus_one() {
-        let model = LinearRegressionModel {
-            theta0: 1.0,
-            theta1: 1.0,
-        };
+        let model = LinearRegressionModel { theta0: 1.0, theta1: 1.0 };
 
         assert_eq!(1.0, model.predict(0.0));
         assert_eq!(2.0, model.predict(1.0));
